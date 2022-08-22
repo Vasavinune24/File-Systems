@@ -45,20 +45,20 @@ def update():
     if os.stat("data.txt").st_size == 0:
         print("update cannot be performed on empty file...")
     else:
-        r=input("enter employee_id :")
+        r=input("enter student roll :")
         for line in f.readlines():
             l=line.split(",")
             if l[0]==r:
-                n=int(input("enter the parameter to update\n1.name/2.designation/3.salary"))
+                n=int(input("enter the parameter to update\n1.name/2.department/3.age"))
                 if(n==1):
                     name=input("enter name to update :")
                     l[1]=name
                 elif(n==2):
-                    desi=input("enter designation to upadte:")
-                    l[2]=desi
+                    desi=input("enter department to upadte:")
+                    l[2]=dept
                 elif(n==3):
-                    salary=input("Enter salary to update: ")
-                    l[3]=salary
+                    salary=input("Enter age to update: ")
+                    l[3]=age
                 s=','.join(l)
                 x.write(s)
             else:
