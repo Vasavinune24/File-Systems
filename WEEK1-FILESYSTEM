@@ -1,0 +1,89 @@
+def create():
+ f = open("students.txt",'w')
+ n = int(input("Enter no of entries : "))
+ f.write("%4s\t%10s\t%6s\n"%("Erollno","Ename","Edepartment"))
+ for _ in range(n):
+    rollno,name,department = input().split()
+    f.write("%4s\t%10s\t%6s\n"%(rollno,name,department))
+ f.close()
+def display():
+ f = open("students.txt",'r')
+ print(f.read())
+ f.close()
+def insert():
+ rollno = input("Enter student id : ")
+ name = input("Enter name of student : ")
+ department = input("Enter department : ")
+ f = open("students.txt",'a')
+ f.write("%4s\t%10s\t%6s\n"%(rollno,name,department))
+ f.close()
+def delete():
+ data = input("Enter student id to be removed : ")
+ f = open("students.txt",'r')
+ d = f.readlines()
+ f.close()
+ f = open("students.txt",'w')
+ for line in d:
+    if data in line[:4].strip():
+        f.write('')
+    else:
+        f.write(line)
+ f.close()
+def search():
+    rollno=input("enter roll no to search:")
+    f=open("students.txt","r")
+    for line in f.readlines():
+           if rollno in line:
+               print("student_details found...")
+               print(line)
+               break
+    else:
+        print("student details not found...")
+def update():
+    f=open("data.txt","r+")
+    x=open("temp1.txt","r+")
+    if os.stat("data.txt").st_size == 0:
+        print("update cannot be performed on empty file...")
+    else:
+        r=input("enter student roll :")
+        for line in f.readlines():
+            l=line.split(",")
+            if l[0]==r:
+                n=int(input("enter the parameter to update\n1.name/2.department/3.Age"))
+                if(n==1):
+                    name=input("enter name to update :")
+                    l[1]=name
+                elif(n==2):
+                    desi=input("enter department to upadte:")
+                    l[2]=dept
+                elif(n==3):
+                    salary=input("Enter age to update: ")
+                    l[3]=age
+                s=','.join(l)
+                x.write(s)
+            else:
+                x.write(line)
+    x.close()
+    f.close()
+    os.remove("data.txt")
+    os.rename("temp1.txt","data.txt")
+    display()
+
+print("1.write\n2.display\n3.insert\n4.delete\n5.search\n6.update\n")
+while True:
+    op=int(input("enter op :"))
+    if(op==1):
+        create()
+    if(op==2):
+        display()
+    if(op==3):
+        insert()
+    if(op==4):
+        delete()
+    if(op==5):
+        search()
+    if(op==6):
+        update()
+    ch=input("do you want do more operations (y/n) : ")
+    if ch in "Nn":
+        break
